@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="default.css">
+  <title>Cloud Translate Dashboard</title>
+</head>
+
+<body>
+
+<div id="wrapper" class="logs">
+  <nav>
+    <span id="to-settings" class="nav-item">⚙️</span>
+    <span id="to-manual-translate" class="nav-item">🖱️</span>
+    <span id="to-simulation" class="nav-item">📈</span>
+    <span id="to-logs" class="nav-item selected">📜</span>
+  </nav>
+
+  <div id="config">
+    <div class="card">
+      <h1>Config</h1>
+      <span>
+        <label for="translate-server-address">Translator server address:</label>
+        <input type="text" id="translate-server-address"></input>
+      </span>
+
+      <button id="server-address-update">Update Server Address</button>
+    </div>
+  </div>
+
+  <div id="manual-translate">
+    <div class="card">
+      <h1>Manual Translate</h1>
+      <label for="text-to-translate">Text to Translate</label>
+      <textarea id="text-to-translate"></textarea>
+
+      <label for="translated-text">Translated Text</label>
+      <textarea id="translated-text" readonly></textarea>
+      <select name="language" id="language-selector"></select>
+    </div>
+  </div>
+
+  <div id="auto-translate">
+    <div id="stress-test" class="card">
+
+      <h1>Stress Test</h1>
+      <label for="num-clients-control">Speakers to simulate</label>
+      <div id="num-clients-control" class="number-input">
+        <button class="minus-button">-</button>
+        <input type="text" id="number-of-clients"></input>
+        <button class="plus-button">+</button>
+      </div>
+
+      <label for="stress-test-duration-control">Simulation duration (seconds)</label>
+      <div id="stress-test-duration-control" class="number-input">
+        <button class="minus-button">-</button>
+        <input type="text" id="stress-test-duration"></input>
+        <button class="plus-button">+</button>
+      </div>
+
+      <button id="start-stress-test" class="start-button">Start Simulation</button>
+      <button id="stop-stress-test" class="stop-button" style="display: none">Stop Simulation</button>
+    </div>
+
+    <div id="all-languages" class="card">
+
+      <h1>All Languages</h1>
+      <label for="all-languages-duration-control">How long to run simulation for (seconds):</label>
+      <div id="all-languages-duration-control" class="number-input">
+        <button class="minus-button">-</button>
+        <input type="text" id="all-languages-test-duration"></input>
+        <button class="plus-button">+</button>
+      </div>
+
+      <button id="start-all-languages-test" class="start-button">
+        Start Simulation
+      </button>
+
+      <button id="stop-all-languages-test" class="stop-button" style="display: none">
+        Stop Simulation
+      </button>
+    </div>
+
+    <div id="stats-card" class="card">
+      <h1>Simulation Stats</h1>
+      <div id="simulation-stats">
+        <canvas id="translations-pie"></canvas>
+
+        <div id="stat-labels">
+          <div>
+            <label for="translations-requested">Translations sent:</label>
+            <span id="translations-requested">-</span>
+          </div>
+
+          <div>
+            <label for="translations-received">Translations received:</label>
+            <span id="translations-received">-</span>
+          </div>
+
+          <div>
+            <label for="response-time">Avg response time:</label>
+            <span id="response-time">-</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="logs"></div>
+</div>
+
+<template id="simulationLog">
+  <div class="simulationLogRow">
+    <span class="translatorAddress"></span>
+    <span class="startTime"></span>
+    <span class="duration"></span>
+    <span class="totalTranslationsRequested"></span>
+    <span class="totalTranslationsReceived"></span>
+    <span class="averageResponseTime"></span>
+    <span class="clientLogsHeading">ClientLogs</span>
+    <div class="clientLogs">
+      <div id="clientLogHeaders" class="clientLogRow">
+        <span>TargetLanguage</span>
+        <span>Requested</span>
+        <span>Received</span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="clientLog">
+  <div class="clientLogRow">
+    <span class="targetLang"></span>
+    <span class="translationsRequested"></span>
+    <span class="translationsReceived"></span>
+    <span class="translationLogsHeading">Requests Log</span>
+    <div class="translationLogs">
+      <div id="translationLogHeaders" class="translationLogRow">
+        <span>Request</span>
+        <span>Response</span>
+        <span>Time</span>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="translationLog">
+  <div class="translationLogRow">
+    <span class="request"></span>
+    <span class="response"></span>
+    <span class="timeTaken"></span>
+  </div>
+</template>
+
+</body>
+<script src="controller.js" type="module"></script>
