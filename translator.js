@@ -1,6 +1,5 @@
 // code adapted from https://cloud.google.com/translate/docs/basic/translating-text#translate_translate_text-nodejs
 // Imports the Google Cloud client library
-import config from './config.js';
 import ws from 'ws';
 import express from 'express';
 import http from 'http';
@@ -49,5 +48,5 @@ const wsServer = new ws.Server({ server: server });
 wsServer.on('connection', listener);
 
 // expose ports and websocket
-const PORT = config.translatorPort;
+const PORT = process.env.port || 9999;
 server.listen(PORT, () => console.log(`translator started on port ${PORT}`));
