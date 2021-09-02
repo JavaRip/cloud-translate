@@ -16,6 +16,7 @@ const server = http.createServer(app);
 // environment variable. See README for instructions on setting the env when running image
 // https://cloud.google.com/translate/docs/setup#using_the_service_account_key_file_in_your_environment
 if (!fs.existsSync('api_key.json')) {
+  console.log('api key file created');
   fs.writeFileSync('api_key.json', process.env.GOOGLE_APPLICATION_KEY);
 } else if (fs.readFileSync('api_key.json', 'utf8') !== process.env.GOOGLE_APPLICATION_KEY) {
   console.log('application key updated');

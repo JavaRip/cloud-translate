@@ -7,4 +7,4 @@ COPY ./ ./
 ENV PORT 9999
 EXPOSE 9999
 
-CMD ["node", "server.js"]
+CMD ["node", "translator.js"]
