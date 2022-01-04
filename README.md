@@ -13,6 +13,26 @@ demand.
 
 ## How to Run
 
+### Obtaining a Google Application Key
+
+A Google Application Key can be generated on the Google Cloud Platform. The key comes in a
+file with the following format:
+
+```json
+  {
+    "type": ,
+    "project_id": ,
+    "private_key_id": ,
+    "private_key": ,
+    "client_email": ,
+    "client_id": ,
+    "auth_uri": ,
+    "token_uri": ,
+    "auth_provider_x509_cert_url": ,
+    "client_x509_cert_url" :
+  }
+```
+
 ### Running Locally
 
 1. Set the environment variable to the contents of the API key file:
@@ -55,6 +75,7 @@ WebSocket Send with the following format:
 {
   text: 'text to translate',
   target: 'language code for source text to be translated to'
+  … // additional user defined attributes
 }
 ```
 
@@ -74,7 +95,7 @@ a WebSocket message in the following format:
   request: {
     text: 'text sent in original request',
     target: 'target language sent in original request'
-    … // additional attributes
+    … // any additional attributes added in the request from the client will be returned
   }
 }
 ```
